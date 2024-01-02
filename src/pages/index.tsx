@@ -3,7 +3,13 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 
-import { api } from "~/utils/api";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.extend(relativeTime);
+
+import Image from 'next/image'
+
+import { RouterOutputs, api } from "~/utils/api";
 
 const CreatePostWizard = () => {
   const {user} = useUser();
@@ -12,10 +18,12 @@ const CreatePostWizard = () => {
 
   return (
     <div className="flex gap-3">
-      <img 
+      <Image 
         src={user.profileImageUrl} 
         alt="Profile Image" 
-        className="w-12 h-12 rounded-full" 
+        className="w-12 h-12 rounded-full"
+        width={56}
+        height={56} 
       />
       <input placeholder="Tell your story through emojis!" className="grow bg-transparent outline-none"/>
 
@@ -23,6 +31,34 @@ const CreatePostWizard = () => {
   );
 
 }
+
+type PostWithAuthor = RouterOutputs["post"]["getAll"][number];
+
+const PostView = (props: PostWithAuthor) => {
+
+  const {post, author} = props;
+
+  return (
+    <div key={post.id} className="p-4 border-b border-slate-500 flex gap-3">
+      <Image
+        src={author.profileImageUrl}
+        className="h-12 w-12 rounded-full"
+        alt={`@${author.username}'s profile picture`}
+        width={56}
+        height={56}
+      />
+      <div className="flex flex-col">
+        {/* Trying to avoid doing strings inside of JSX template directly */}
+        <div className="flex text-slate-300 gap-1">
+          <span>{`@${author.username!}`}</span>
+          {/* Day.js API for relative time */}
+          <span>{` · ${dayjs(post.createdAt).fromNow()}`}</span>
+        </div>
+        <span>{post.content}</span>
+      </div>
+    </div>
+  );
+};
 
 const Home: NextPage = () => {
 
@@ -52,8 +88,8 @@ const Home: NextPage = () => {
             {user.isSignedIn && <CreatePostWizard />}
           </div>
           <div className="flex flex-col">
-            {[...data, ...data]?.map((post) => (
-              <div key={post.id} className="p-8 border-b border-slate-500"> {post.content} </div>
+            {[...data, ...data]?.map((fullPost) => (
+              <PostView {...fullPost} key={fullPost.post.id} />
             ))}
           </div>
         </div>
