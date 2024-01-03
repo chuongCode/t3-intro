@@ -1,7 +1,6 @@
-import { clerkClient } from "@clerk/nextjs/server";
 import { User } from "@clerk/nextjs/api";
+import { clerkClient } from "@clerk/nextjs/server";
 import { TRPCError } from "@trpc/server";
-
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
@@ -14,8 +13,7 @@ const filterUserForClient = (user: User) => {
   };
 };
 
-export const postRouter = createTRPCRouter({
-
+export const postsRouter = createTRPCRouter({
   getAll: publicProcedure.query(async ({ ctx }) => {
     const posts = await ctx.db.post.findMany({
       take: 100,
@@ -28,12 +26,14 @@ export const postRouter = createTRPCRouter({
       })
     ).map(filterUserForClient);
 
+    console.log(users);
+
     return posts.map((post) => {
       const author = users.find((user) => user.id === post.authorId);
 
-      if (!author || !author.username) 
-        throw new TRPCError({ 
-          code: "INTERNAL_SERVER_ERROR", 
+      if (!author || !author.username)
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
           message: "Author for post not found",
         });
 
@@ -46,5 +46,4 @@ export const postRouter = createTRPCRouter({
       };
     });
   }),
-
 });
