@@ -1,5 +1,6 @@
 # Our github repo should be what makes sure our code is correct
 # Vercel's role is to deploy our code, therefore we should separate these two
+# This should speed up our deployment
 name: CI
 
 on: [push, pull_request]
