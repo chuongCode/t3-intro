@@ -1,0 +1,27 @@
+# Our github repo should be what makes sure our code is correct
+# Vercel's role is to deploy our code, therefore we should separate these two
+name: CI
+
+on: [push, pull_request]
+
+# We're just checking it's a URL so any URL will do
+env:
+  DATABASE_URL: "https://www.google.com/"
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Typecheck
+      run: npm run typecheck
+
+    - name: Lint
+      run: npm run lint
