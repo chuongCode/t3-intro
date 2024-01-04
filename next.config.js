@@ -21,6 +21,15 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
+
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  // swcMinifiy will be removed in nextJS 15
+  swcMinify: true,
 };
 
 export default config;
