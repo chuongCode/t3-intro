@@ -71,7 +71,10 @@ export const postRouter = createTRPCRouter({
 
       // Check if user is allowed to create a post (ratelimit)
       const { success } = await ratelimit.limit(authorId);
-      if (!success) throw new TRPCError({ code: "TOO_MANY_REQUESTS" });
+      if (!success) throw new TRPCError({ 
+        code: "TOO_MANY_REQUESTS", 
+        message: "You can only send one post every hour!",
+      });
 
       const post = await ctx.db.post.create({
         data: {
