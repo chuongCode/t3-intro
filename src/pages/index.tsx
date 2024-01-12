@@ -134,7 +134,7 @@ const Home: NextPage = () => {
 
   const { isLoaded: userLoaded, isSignedIn } = useUser();
 
-  // Start fetching ASAP
+  // Start fetching
   api.post.getAll.useQuery();
 
   // User usually loads faster, so return an empty div if both posts and user are not loaded
