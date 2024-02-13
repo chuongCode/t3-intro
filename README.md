@@ -1,6 +1,7 @@
 # Emoji social media platform
 
-This is a fun little application akin to Twitter where emojis are the only way to communicate your thoughts for the hour! It's currently hosted on https://t3-intro-beta.vercel.app/
+This is a fun little application akin to Twitter where emojis are the only way to communicate your thoughts for the hour! It was formerly hosted on https://t3-intro-beta.vercel.app/
+As of right now, it is inactive and idle.
 
 This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app` and was meant to familiarize me with the T3 stack and its capabilities.
 
