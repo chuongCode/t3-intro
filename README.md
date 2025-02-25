@@ -8,3 +8,21 @@ This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3
 Following in the footsteps of the great Theo Browne of [t3.gg](https://t3.gg/)
 
 This project is built using Typescript, structured around tRPC for type safety, with Next.js and React for frontend, Tailwind for styling, Prisma for database, Vercel for deployment, Planetscale for DB management, Hot-toast for notifications, Zod for validation, Upstash for rate-limiting, Axciom for sign-in functionality, and Dayjs for handling relative time.
+
+# To run on your own local machine:
+
+Installation:
+```
+cd note-taker
+npm install
+```
+Update with your own values:
+```
+cp .env.example .env
+```
+
+Running:
+```
+npm run db:push
+npm run dev
+```
