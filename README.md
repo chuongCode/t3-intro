@@ -9,13 +9,14 @@ Following in the footsteps of the great Theo Browne of [t3.gg](https://t3.gg/)
 
 This project is built using Typescript, structured around tRPC for type safety, with Next.js and React for frontend, Tailwind for styling, Prisma for database, Vercel for deployment, Planetscale for DB management, Hot-toast for notifications, Zod for validation, Upstash for rate-limiting, Axciom for sign-in functionality, and Dayjs for handling relative time.
 
-# To run on your own local machine:
+# Running:
 
 Installation:
 ```
-cd note-taker
+cd t3-intro
 npm install
 ```
+
 Update with your own values:
 ```
 cp .env.example .env
